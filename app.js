@@ -6,7 +6,7 @@ const profile = {
   email: "alesomensit@gmail.com",
   github: "",
   linkedin: "",
-  whatsapp: "54 99920-4663"
+  whatsapp: "https://wa.me/5554999204663"
 };
 
 // Para adicionar um projeto, copie um objeto desta lista.
