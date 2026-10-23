@@ -1,0 +1,25 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Projeto · Alessandro</title><meta name="description" content="Detalhes do projeto"><link rel="stylesheet" href="style.css"></head><body>
+<header><div class="wrap"><nav><a class="logo" href="index.html"><i>AST</i>Alessandro</a><ul>
+<li><a href="index.html" class="A1">Início</a></li><li><a href="sobre.html" class="A2">Sobre</a></li><li><a href="projetos.html" class="on">Projetos</a></li><li><a href="contato.html" class="A4">Contato</a></li></ul></nav></div></header>
+<section><div class="wrap"><div class="crumb"><a href="projetos.html">Projetos</a> / <span id="bc"></span></div><div id="p"></div></div></section>
+<footer><div class="wrap"><span>© 2026 Alessandro · AST Dev</span><span>Desenvolvido por mim</span></div></footer>
+<script src="projetos-data.js"></script><script>
+const id=new URLSearchParams(location.search).get("id"),p=PROJETOS.find(x=>x.id===id),el=document.getElementById("p");
+if(!p){el.innerHTML='<h1>Projeto não encontrado</h1><a class="btn" href="projetos.html">Voltar</a>'}else{
+document.title=p.nome+" · Alessandro";bc.textContent=p.nome;
+const SL={ok:"Concluído",go:"Em andamento",next:"Próxima etapa",wait:"Planejado"};
+const b=(u,t,c)=>u&&u!=="#"?`<a class="btn ${c}" href="${u}" target="_blank" rel="noopener">${t}</a>`:`<span class="btn off">${t} · em breve</span>`;
+const k=p.etapas.findIndex(e=>e.s==="go"),cur=p.etapas[k];
+el.innerHTML=`<span class="eyebrow">Projeto educativo</span><h1>${p.nome}</h1>${badge(p)}
+<div class="two"><div>
+<h2>O que é este projeto?</h2><p>${p.desc}</p>
+<h2 style="margin-top:36px">Etapas e progresso</h2>
+<div class="card"><div class="ph"><span>Progresso geral estimado</span><b>${pct(p)}%</b></div><div class="bar"><span style="width:${pct(p)}%"></span></div>
+${cur?`<p style="margin:16px 0 0"><small>Etapa ${k+1} de ${p.etapas.length} · atual</small><br><b style="color:var(--tx)">${cur.n}</b></p>`:""}
+<details><summary>Ver todas as etapas (${p.etapas.length})</summary><ol class="tl">${p.etapas.map(e=>`<li><span>${e.n}</span><em class="badge ${e.s}">${SL[e.s]}</em></li>`).join("")}</ol></details>
+<p class="pc" style="margin:14px 0 0">Estimativa manual, atualizada conforme o projeto evolui.</p></div>
+<h2 style="margin-top:36px">Funcionalidades</h2><p>As funcionalidades serão documentadas quando estiverem definidas e implementadas.</p>
+<h2 style="margin-top:36px">Vídeo tutorial</h2><div class="video">${p.video?`<iframe src="${p.video}" allowfullscreen title="Tutorial ${p.nome}"></iframe>`:"Vídeo em breve"}</div>
+</div><aside class="card side"><dl class="facts"><dt>Tecnologias</dt><dd style="margin-top:8px">${p.techs.map(t=>`<span class="tag">${t}</span>`).join("")}</dd><dt>Plataforma</dt><dd>${p.plataforma}</dd><dt>Status</dt><dd>${p.statusTxt}</dd><dt>Transparência</dt><dd style="color:var(--mut);font-size:.9rem">Projeto em desenvolvimento para fins de aprendizado. As funcionalidades serão listadas quando implementadas e verificadas.</dd></dl>
+<div style="margin-top:22px">${b(p.demo,"Ver demo online","")}${b(p.download,"Baixar versão demo","o")}</div></aside></div>`}
+</script></body></html>
